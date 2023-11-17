@@ -22,6 +22,34 @@ describe('RoomsService', () => {
     service = module.get<RoomsService>(RoomsService);
   });
 
+  it('findAll should return an array of rooms', async () => {
+    jest.spyOn(service, 'findAll').mockResolvedValueOnce([
+      {
+        id: '1',
+        name: 'test',
+        description: 'test',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        booking: [],
+      } as Room,
+    ]);
+    const rooms = await service.findAll();
+
+    expect(rooms).toHaveLength(1);
+    expect(rooms).toBeInstanceOf(Array);
+    expect(service.findAll).toHaveBeenCalledTimes(1);
+    expect(service.findAll).toHaveBeenCalledWith();
+    expect(service.findAll).toHaveReturned();
+  });
+
+  it('should create a room', () => {
+    const testRoom = {
+      name: 'test1',
+      description: '',
+    };
+    expect(service.create(testRoom)).toEqual('This action adds a new room');
+  });
+
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
