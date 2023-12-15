@@ -36,3 +36,4 @@ lerna-debug.log*
 .history
 
 bookingDb/
+cucumber-report.html
